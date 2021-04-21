@@ -2,6 +2,7 @@
 using Aps.Models;
 using Aps.Models.api;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Threading.Tasks;
 
 namespace Aps.Repositories
@@ -61,6 +62,21 @@ namespace Aps.Repositories
                 return user;
             }
             return null;
+        }
+
+        internal Task DeleteUsusario(int usuarioId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<dynamic> DeleteUsuario(int usuarioId)
+        {
+            var resp = await _context.Usuarios.FindAsync(usuarioId);
+            _context.Usuarios.Remove(resp);
+
+            await _context.SaveChangesAsync();
+
+            return "Usuário excluído.";
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Aps.Models.api;
 using Aps.Repositories;
 using Aps.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -55,6 +56,14 @@ namespace Aps.Controllers
             {
                 return BadRequest(e.Message);
             }
+        }
+
+        [HttpDelete("{usuarioId}")]
+        [Authorize]
+        public async Task<ActionResult<dynamic>> Delete(int usuarioId)
+        {
+            var resp = await _repo.DeleteUsuario(usuarioId);
+            return Ok(resp);
         }
     }
 }
