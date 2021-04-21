@@ -36,5 +36,15 @@ namespace Aps.Repositories
 
             return denuncia;
         }
+
+        public async Task<dynamic> DeleteDenuncia(int denunciaId)
+        {
+            var resp = await _context.Denuncias.FindAsync(denunciaId);
+            _context.Denuncias.Remove(resp);
+
+            await _context.SaveChangesAsync();
+
+            return "Denuncia excluída.";
+        }
     }
 }
