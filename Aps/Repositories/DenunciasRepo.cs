@@ -2,6 +2,7 @@
 using Aps.Models;
 using Aps.Models.api;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -29,7 +30,7 @@ namespace Aps.Repositories
 
         public async Task<dynamic> CreateDenuncia(DenunciaForm denunciaForm)
         {
-            var denuncia = new Denuncia(denunciaForm.TextoDenuncia, denunciaForm.PaisId);
+            var denuncia = new Denuncia(denunciaForm.TextoDenuncia, denunciaForm.PaisId, DateTime.Now);
 
             await _context.Denuncias.AddAsync(denuncia);
             _context.SaveChanges();

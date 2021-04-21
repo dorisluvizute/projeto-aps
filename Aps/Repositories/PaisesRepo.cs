@@ -2,6 +2,7 @@
 using Aps.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Aps.Repositories
@@ -16,13 +17,13 @@ namespace Aps.Repositories
 
         public async Task<List<Pais>> GetPaises()
         {
-            var resp = await _context.Paises.ToListAsync();
+            var resp = await _context.Paises.Include("Denuncias").ToListAsync();
             return resp;
         }
 
         public async Task<Pais> GetPaisById(int paisId)
         {
-            var resp = await _context.Paises.FindAsync(paisId);
+            var resp = await _context.Paises.Where(p => p.Id == paisId).Include("Denuncias").FirstOrDefaultAsync();
             return resp;
         }
     }
