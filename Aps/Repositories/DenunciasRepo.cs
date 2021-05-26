@@ -30,7 +30,7 @@ namespace Aps.Repositories
 
         public async Task<dynamic> CreateDenuncia(DenunciaForm denunciaForm)
         {
-            var denuncia = new Denuncia(denunciaForm.TextoDenuncia, denunciaForm.PaisId, DateTime.Now);
+            var denuncia = new Denuncia(denunciaForm.TextoDenuncia, denunciaForm.PaisId, DateTime.Now, denunciaForm.ContinenteId);
 
             await _context.Denuncias.AddAsync(denuncia);
             _context.SaveChanges();
